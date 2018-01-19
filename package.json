@@ -1,19 +1,24 @@
 {
-  "name": "wt-iot",
-  "version": "1.0.0",
-  "description": "万腾产品调试工具",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/t-mango/wt-iot.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/t-mango/wt-iot/issues"
-  },
-  "homepage": "https://github.com/t-mango/wt-iot#readme"
+    "name": "wt-iot",
+    "version": "1.0.0",
+    "description": "万腾产品调试工具",
+    "bin": {
+        "wt-iot": "./src/index.js"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/t-mango/wt-iot.git"
+    },
+    "author": "mango",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/t-mango/wt-iot/issues"
+    },
+    "homepage": "https://github.com/t-mango/wt-iot#readme",
+    "dependencies": {
+        "chalk": "^2.3.0"
+    }
 }
