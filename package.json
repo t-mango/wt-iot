@@ -19,6 +19,8 @@
     },
     "homepage": "https://github.com/t-mango/wt-iot#readme",
     "dependencies": {
-        "chalk": "^2.3.0"
+        "chalk": "^2.3.0",
+        "commander": "^2.13.0",
+        "request": "^2.83.0"
     }
 }
