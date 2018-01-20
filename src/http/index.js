@@ -36,6 +36,7 @@ module.exports = {
         options.form = data;
         return new P(function(resolve, reject) {
 
+            resolve({})
         });
 
         request.post(options, callback);

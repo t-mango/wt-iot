@@ -45,6 +45,8 @@ class WtConfig {
     }
     updateAuthInfo() {
 
+        auth.auth()
+
     }
 }
 module.exports = new WtConfig();
