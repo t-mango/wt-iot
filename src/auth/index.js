@@ -5,7 +5,8 @@
 var https = require("./../http/index");
 
 module.exports = {
-    auth: function () {
+
+    auth: function() {
         var data = {
             "appId": "OhYFDUqTQvJD6wzb1NWFWb4KhVwa",
             "secret": "sA2BQ1oGZsDV3BPTohibXxkLsiga"
@@ -22,8 +23,3 @@ module.exports = {
         });
     }
 };
-
-
-
-
-

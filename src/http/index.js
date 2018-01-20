@@ -4,6 +4,7 @@
 
 var request = require("request"),
     path = require("path"),
+    P = require("bluebird"),
     certFile = path.resolve(__dirname, "client.crt"),
     keyFile = path.resolve(__dirname, "client.key"),
     //caFile = path.resolve(__dirname, "ssl/ca.cer.pem"),
@@ -28,11 +29,16 @@ module.exports = {
     //     });
     // }
 
-    post: function (url, data, callback) {
+    post: function(url, data, callback) {
+
         var options = this.getCert();
         options.url = url;
         options.form = data;
-        request.post(options, callback)
+        return new P(function(resolve, reject) {
+
+        });
+
+        request.post(options, callback);
     },
 
     // extend(des, src, override) {
@@ -48,7 +54,7 @@ module.exports = {
     //     return des;
     // }
 
-    getCert: function () {
+    getCert: function() {
         return {
             cert: fs.readFileSync(certFile),
             key: fs.readFileSync(keyFile),

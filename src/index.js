@@ -20,7 +20,9 @@ var program = require("commander"),
 
 program
     .version("1.0.0")
-    .option("-c,--config <path>", "配置文件", config.Config.getConfig);
+    .option("-c,--config <path>", "配置文件")
+    .option("-s,--show", "打印cli信息", config.ShowInfo());
+
 
 //设备
 program.command("device")
@@ -41,7 +43,7 @@ program
     .option("-i,--interval <n>", "多少毫秒执行")
     .option("-f,--frequency <n>", "执行次数")
     .option("-s,--sort [value]", " 1 顺序执行，0 同时执行")
-    .action(function (cmd, smn, options) {
+    .action(function(cmd, smn, options) {
         console.log("exec 命令:\"%s\" 设备id: %s  using %s mode", cmd, smn, options.interval);
         (new https()).post();
     });
@@ -50,13 +52,13 @@ program
     .command("result [npms...]")
     .description("查询结果")
     .option("-s,--statistics", "附带统计结果")
-// .action(function (npms, options) {
-//     if (npms) {
-//         npms.forEach(element => {
-//             console.log("elecmt $s", element);
-//         });
-//     }
-// });
+    // .action(function (npms, options) {
+    //     if (npms) {
+    //         npms.forEach(element => {
+    //             console.log("elecmt $s", element);
+    //         });
+    //     }
+    // });
 
 program
     .parse(process.argv);

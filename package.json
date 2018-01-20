@@ -19,6 +19,7 @@
     },
     "homepage": "https://github.com/t-mango/wt-iot#readme",
     "dependencies": {
+        "bluebird": "^3.5.1",
         "chalk": "^2.3.0",
         "commander": "^2.13.0",
         "eslint": "^4.16.0",
