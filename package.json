@@ -21,6 +21,9 @@
     "dependencies": {
         "chalk": "^2.3.0",
         "commander": "^2.13.0",
-        "request": "^2.83.0"
+        "eslint": "^4.16.0",
+        "q": "^1.5.1",
+        "request": "^2.83.0",
+        "request-promise": "^4.2.2"
     }
 }
