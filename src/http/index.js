@@ -10,36 +10,29 @@ var request = require("request"),
     //caFile = path.resolve(__dirname, "ssl/ca.cer.pem"),
     fs = require("fs");
 
-
-
-
 module.exports = {
-
-    // getAuth() {
-
-
-
-
-
-    //     request("https://180.101.149.140:8743/iocm/app/sec/v1.1.0/login", function (error, response, body) {
-    //         console.log("mango1")
-    //         if (!error && response.statusCode == 200) {
-    //             console.log(body) // 打印google首页
-    //         }
-    //     });
-    // }
-
-    post: function(url, data, callback) {
-
+    post: function (url, data) {
         var options = this.getCert();
         options.url = url;
         options.form = data;
-        return new P(function(resolve, reject) {
+        return new P((resolve, reject) => {
+            request.post(options, (err, respone, body) => {
+                if (!err && respone.statusCode === 200) {
+                    var json = JSON.parse(body);
+                    resolve({
+                        statusCode: 200,
+                        data: json
+                    });
+                } else {
+                    reject({
+                        statusCode: 500,
+                        Msg: err
+                    });
+                }
+            });
 
-            resolve({})
         });
 
-        request.post(options, callback);
     },
 
     // extend(des, src, override) {
@@ -55,7 +48,7 @@ module.exports = {
     //     return des;
     // }
 
-    getCert: function() {
+    getCert: function () {
         return {
             cert: fs.readFileSync(certFile),
             key: fs.readFileSync(keyFile),

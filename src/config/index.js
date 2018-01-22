@@ -5,48 +5,35 @@
  * 
  * 
  */
-var fs = require("fs"),
-    path = require("path"),
-    auth = require("./../auth/index"),
-    configPath = path.resolve(__dirname, "config.json");
 
-class WtConfig {
+var auth = require("./../auth/index");
 
-    SaveConfig(json) {
-        var org;
-        if (fs.existsSync(configPath)) {
+class Config {
 
-            org = JSON.parse(this.readConfig());
+    constructor() {
 
-            for (var key in json) {
-                org[key] = json[key];
-            }
-        }
+    }
 
-        fs.writeFileSync(configPath, JSON.stringify(org ? org : json));
-
+    SetConfig(path) {
+        console.log(1);
+        console.log(path);
     }
 
     GetConfig() {
-        console.log(configPath);
-        return fs.existsSync(configPath) ? JSON.parse(this.readConfig()) : null;
-    }
-    ShowInfo() {
-        var json = this.GetConfig();
-        console.log(json);
-        console.log(json.name);
-    }
-    readConfig() {
-        var data = fs.readFileSync(configPath);
-        if (data[0] === 0xEF && data[1] === 0xBB && data[2] === 0xBF) {
-            data = data.slice(3);
-        }
-        return data.toString("utf-8");
-    }
-    updateAuthInfo() {
 
-        auth.auth()
+        auth.auth().then()
+
+
+        return {
+
+
+        };
+    }
+    init() {
 
     }
 }
-module.exports = new WtConfig();
+
+
+
+module.exports = { Config };
