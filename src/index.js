@@ -13,9 +13,12 @@
 // }
 
 var https = require("./http/index");
-import config from "./config/index";
+// import config from "./config/index";
 
 var program = require("commander"),
+    config = require("./config/index"),
+    cmd = require("./cmd/index"),
+    devices = require("./device/index"),
     chalk = require("chalk");
 
 program
@@ -27,13 +30,16 @@ program
 //设备
 program.command("device")
     .description("设备命令包括了设备添加/删除/查询信息/列表")
-    .option("-a,--add [value]", "添加设备")
+    .option("-a,--add <value>", "添加设备")
     .option("-d,--delete [value]", "删除设备")
     .option("-i,--info [value]", "查看设备信息")
     .option("-l,--list", "查看当前配置注册所有信息")
     .action((options) => {
         if (options.add) {
-
+            //输入了--add选项
+            // console.log("添加新的设备%s",options.add);
+            // console.log(devices.Devices);
+            (new devices.Devices()).addDevice();
         }
 
     });
@@ -41,7 +47,20 @@ program.command("device")
 program
     .command("cmd")
     .description("命令")
-    .option("-l--list", "查看所有命令");
+    .option("-l,--list", "查看所有命令")
+    .action(function (e) {
+        if(e.list === undefined){
+            //没有输入--list
+            console.log(
+                "\n  Usage: wt-iot cmd [Options]" +
+                "\n\n\n  Options:" +
+                "\n\n    -l, --list\t查看所有命令"
+            );
+        }else {
+            // console.log(cmd.Cmd);
+            (new cmd.Cmd()).ShowAllCommands();
+        }
+    });
 //执行命令
 program
     .command("exec <cmd> [smn...]")

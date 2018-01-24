@@ -11,10 +11,11 @@ var request = require("request"),
     fs = require("fs");
 
 module.exports = {
-    post: function (url, data) {
+    post: function (url, data, headers) {
         var options = this.getCert();
         options.url = url;
         options.form = data;
+        options.headers = headers;//头域信息
         return new P((resolve, reject) => {
             request.post(options, (err, respone, body) => {
                 if (!err && respone.statusCode === 200) {

@@ -9,20 +9,23 @@ module.exports = {
     },
     "rules": {
         "indent": [
-            "error",
+            "off",
             "tab"
         ],
         "linebreak-style": [
             "error",
-            "unix"
+            "windows"
         ],
         "quotes": [
-            "error",
+            "off",
             "double"
         ],
         "semi": [
             "error",
             "always"
-        ]
+        ],
+        "no-unused-vars":"off",
+        "no-empty":"off",
+        "no-console":"off"
     }
 };
