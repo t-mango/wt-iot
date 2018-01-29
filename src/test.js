@@ -5,8 +5,6 @@
 
 
 //注册设备
-
-
 var auth = require("./auth/index");
 var req = require("request");
 var https = require("./http/index");
