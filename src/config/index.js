@@ -7,7 +7,8 @@
  */
 
 var auth = require("./../auth/index"),
-    fs = require("fs"),
+    P = require("bluebird"),
+    fs = P.promisifyAll(require("fs")),
     path = require("path"),
     configFilePath = path.resolve(__dirname, "./config.json");
 
@@ -19,7 +20,7 @@ module.exports = {
     },
     Compare: function() {
         var _this = this;
-        return new Promise((resolve, reject) => {
+        return new P((resolve, reject) => {
             _this.GetConfigByFile().then((res) => {
                 resolve(res.data.expiresToken + 3600 * 1000 > (new Date()).getTime());
             }, () => {
@@ -28,22 +29,15 @@ module.exports = {
         });
     },
     GetConfigByFile: function() {
-        return new Promise((resolve, reject) => {
-            try {
-                resolve({
-                    statusCode: 200,
-                    data: JSON.parse(fs.readFileSync(configFilePath))
-                });
-            } catch (error) {
-                reject({ statusCode: 500, msg: error });
-            }
-        });
+        return fs.readFileSync(configFilePath).then(JSON.parse);
+
     },
     GetConfig: function() {
         var _this = this;
-        return new Promise((resolve, reject) => {
+        return new P((resolve, reject) => {
+            P.all()
 
-            _this.Compare().then()
+
 
         });
 
