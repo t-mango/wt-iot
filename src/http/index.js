@@ -12,7 +12,7 @@ var request = require("request"),
     fs = require("fs");
 
 module.exports = {
-    defaultHeaders: function() {
+    defaultHeaders: function () {
         return {
             headers: {
                 "User-Agent": "request",
@@ -21,37 +21,46 @@ module.exports = {
             }
         };
     },
-    authHeaders: function() {
+    authHeaders: function () {
         var headers = this.defaultHeaders();
         headers.headers.Authorization = `Bearer  + ${data.data.accessToken}`;
         return headers;
 
     },
-    post: function(url, data, headers) {
+    post: function (url, data, headers) {
         var options = this.getCert();
         options.url = url;
         options.form = data;
         options.headers = headers; //头域信息
         return new P((resolve, reject) => {
             request.post(options, (err, respone, body) => {
-                if (!err && respone.statusCode === 200) {
-                    var json = JSON.parse(body);
-                    resolve({
-                        statusCode: 200,
-                        data: json
-                    });
-                } else {
+
+                if (err) {
                     reject({
-                        statusCode: 500,
+                        statusCode: 1,
                         msg: err
                     });
+                } else {
+                    if (respone.statusCode === 200) {
+                        var json = JSON.parse(body);
+                        resolve({
+                            statusCode: 200,
+                            data: json
+                        });
+
+                    } else {
+                        reject({
+                            statusCode: respone.statusCode
+                        });
+                    }
                 }
+
             });
 
         });
 
     },
-    request: function(options) {
+    request: function (options) {
 
         var opt = this.getCert();
         extend(opt, options);
@@ -74,7 +83,7 @@ module.exports = {
             });
         });
     },
-    param: function() {
+    param: function () {
         //todo get 修改data参数放置url
         //     post put delete json/unlin 数据格式变化
 
@@ -95,7 +104,7 @@ module.exports = {
     //     return des;
     // }
 
-    getCert: function() {
+    getCert: function () {
         return {
             cert: fs.readFileSync(certFile),
             key: fs.readFileSync(keyFile),

@@ -6,7 +6,8 @@
         "wt-iot": "./src/index.js"
     },
     "scripts": {
-        "test": "mocha --require src/test/support/env --reporter spec --bail --check-leaks src/test/"
+        "test": "mocha --require src/test/support/env --reporter spec --bail --check-leaks src/test/",
+        "html": "mocha --recursive -R markdown > spec.md  src/test/"
     },
     "repository": {
         "type": "git",
